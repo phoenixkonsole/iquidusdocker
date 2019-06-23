@@ -1,3 +1,58 @@
+```
+git clone https://github.com/buzzkillb/iquidusdocker explorer
+cd explorer
+```
+my sample docker-compose.yml
+```
+version: "3"
+services:
+  volta:
+    image: buzzkillb/voltad:latest
+    volumes:
+      - ~/.volta:/data
+    ports:
+      - 14143:14143
+      - 13143:13143
+  explorer:
+    build: ./explorer
+    stdin_open: true
+    tty: true
+    ports:
+      - 3001:3001
+    links:
+      - mongodb
+      - volta
+    depends_on:
+      - mongodb
+      - volta
+    command: /bin/bash -c "service cron start && cd /opt/iquidus && npm start"
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --bind_ip 0.0.0.0 --logpath=/dev/null --quiet
+    ```
+sample .conf  
+```
+port=14143
+rpcport=13143
+server=1
+rpcuser=RPCUSERNAME
+rpcpassword=PASSWORDCHANGEME
+txindex=1
+listen=1
+rpcallowip=172.19.0.0/0
+```
+```
+docker-compose up
+```
+
 FTC-in-a-box is a simple docker recipe that builds FTC from the github source, builds the iquidius explorer and attaches them together. So that you can have your own little "test" network right on your own computer. It's super lean, and you can generate many blocks pretty quickly.
 
 If you have never setup or run docker, then this is your chance to spin it up and use it to develop something awesome with feathercoin!
