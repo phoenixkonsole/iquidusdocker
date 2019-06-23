@@ -7,8 +7,8 @@ If you have never setup or run docker, then this is your chance to spin it up an
 1. Install Docker Community for your platform of choice - [Here](https://www.docker.com/community-edition#/download)
 2. Git clone this repository into a folder and navigate into it
 ```
-git clone https://github.com/natedavis/ftc-in-a-box.git ftcbox
-cd ftcbox
+git clone https://github.com/buzzkillb/iquidusdocker explorer
+cd explorer
 ```
 3. Use the docker-compose command to build and turn on these containers
 ```
