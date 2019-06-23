@@ -1,8 +1,10 @@
+Instructions  
 ```
 git clone https://github.com/buzzkillb/iquidusdocker explorer
 cd explorer
 ```
 my sample docker-compose.yml
+
 ```
 version: "3"
 services:
@@ -37,7 +39,8 @@ services:
     ports:
       - 27017:27017
     command: mongod --smallfiles --bind_ip 0.0.0.0 --logpath=/dev/null --quiet
-    ```
+```
+
 sample .conf  
 ```
 port=14143
@@ -49,6 +52,13 @@ txindex=1
 listen=1
 rpcallowip=172.19.0.0/0
 ```
+
+when changing settings in explorer/settings.json
+```
+docker-compose build
+```
+
+start up  
 ```
 docker-compose up
 ```
