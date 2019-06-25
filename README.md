@@ -3,6 +3,7 @@ Instructions
 git clone https://github.com/buzzkillb/iquidusdocker explorer
 cd explorer
 ```
+To swap out logo to your coin, change logo.png in explorer folder.  
 my sample docker-compose.yml
 
 ```
