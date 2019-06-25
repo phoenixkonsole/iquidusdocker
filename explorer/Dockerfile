@@ -22,6 +22,7 @@ ADD crontab /etc/cron.d/iquidus-cron
 RUN chmod 0644 /etc/cron.d/iquidus-cron
 RUN touch /var/log/cron.log
 COPY settings.json /opt/iquidus/settings.json
+COPY logo.png /opt/iquidus/public/images/logo.png
 
 USER root
 EXPOSE 3001
