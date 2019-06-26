@@ -13,7 +13,7 @@
   "coin": "Feathercoin",
 
   // coin symbol
-  "symbol": "FTC",
+  "symbol": "XVT",
 
   // logo
   "logo": "/images/logo.png",
@@ -46,14 +46,14 @@
 
   // wallet settings
   "wallet": {
-    "host": "ftcregtest",
-    "port": 19001,
-    "user": "ftc1",
-    "pass": "ftc123"
+    "host": "volta",
+    "port": 13143,
+    "user": "USERNAME",
+    "pass": "PASSWORD"
   },
 
   // confirmations
-  "confirmations": 1,
+  "confirmations": 6,
 
   // language settings
   "locale": "locale/en.json",
@@ -81,9 +81,9 @@
   // ensure links on API page are valid
   "api": {
     "blockindex": 1337,
-    "blockhash": "1733320247b15ca2262be646397d1ffd6be953fa638ebb8f5dcbb4c2b91b34f1",
-    "txhash": "f270cd3813254c9922a2e222a56ba745842d9112223a1394062e460b33d27b7e",
-    "address": "RBiXWscC63Jdn1GfDtRj8hgv4Q6Zppvpwb"
+    "blockhash": "2c4600714b7c24136aae64c6d4f764bc3be1094aa0fafd1e0003a1c6ff86f1e2",
+    "txhash": "b0b65d24bde29da13f964f70597578b651fd0adaa9ddb8fdf0799420f205741b",
+    "address": "SSn74P2tjbqvybtxXF2PNN5b8MPYLM5dcE"
   },
 
   // market settings
@@ -120,8 +120,8 @@
   "googleplus": "yourgooglepluspage",
 
   //genesis
-  "genesis_tx": "97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9",
-  "genesis_block": "3cb269a7f1ac8338f0ac28bf2f2cf6b67d91bd5e09b82efa60fceae3d5924323",
+  "genesis_tx": "b89ee2bce23f5aac5c715d4e54e22a8577ad1864917aa131f1dc83802d9e883c",
+  "genesis_block": "0000001161c6225698995a1659f962d72ddc46567cafdcd673b6271a9b1ad02d",
 
   //heavy (enable/disable additional heavy features)
   "heavy": false,
