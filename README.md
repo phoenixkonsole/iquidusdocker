@@ -63,7 +63,15 @@ start up
 ```
 docker-compose up
 ```
+info for Denarius  
+```
+blockhash: 000000000661c86bf89e652eb142093bd9123006f3085595dee183bfe1c24570
+txhash: 776684cfd496890268805a1d86d3fd00f4097c1dbffecc3acd79101c15216594
+address: DABQj7yoQuvfxVVWMf2mqWhoHLDMUqUJsc
 
+genesis_tx: c6d8e8f56c25cac33567e571a3497bfc97f715140fcfe16d971333b38e4ee0f2
+genesis_block: 00000d5dbbda01621cfc16bbc1f9bf3264d641a5dbf0de89fd0182c2c4828fcd
+```
 FTC-in-a-box is a simple docker recipe that builds FTC from the github source, builds the iquidius explorer and attaches them together. So that you can have your own little "test" network right on your own computer. It's super lean, and you can generate many blocks pretty quickly.
 
 If you have never setup or run docker, then this is your chance to spin it up and use it to develop something awesome with feathercoin!
