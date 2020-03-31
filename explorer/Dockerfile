@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-LABEL Description="This image is a build of the FTC explorer"
+LABEL Description="This image is a build of the Iquidus explorer"
 
 RUN apt-get update
 RUN apt-get install --yes software-properties-common
@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get install -y curl sudo nano net-tools build-essential git-core python telnet iputils-ping libkrb5-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
 	apt-get install -y nodejs
 
 RUN git clone https://github.com/iquidus/explorer.git /opt/iquidus
