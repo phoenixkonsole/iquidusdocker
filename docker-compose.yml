@@ -1,10 +1,35 @@
 version: "3"
 services:
-  ftcregtest:
-    build: ./ftc-in-a-box
-    stdin_open: true
-    tty: true
-    command: /bin/bash -c "cd /data && make start && /bin/bash"
+
+  traefik:
+    image: "traefik:v2.2"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true" #change to false in production
+      - "--api.dashboard=true" #change to false in production
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.myresolver.acme.email=youremail@example.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro" 
+    restart: always
+  denarius:
+    image: buzzkillb/denariusd:iquidus
+    volumes:
+      - ~/.denarius:/data
+    ports:
+      - 33369:33369
+      - 32369:32369
+    restart: unless-stopped
   explorer:
     build: ./explorer
     stdin_open: true
@@ -13,11 +38,21 @@ services:
       - 3001:3001
     links:
       - mongodb
-      - ftcregtest
+      - denarius
     depends_on:
       - mongodb
-      - ftcregtest
+      - denarius
     command: /bin/bash -c "service cron start && cd /opt/iquidus && npm start"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.explorer.rule=Host(`explorer.example.com`)"
+      - "traefik.http.routers.explorer.entrypoints=websecure"
+      - "traefik.http.routers.explorer.tls.certresolver=myresolver"
+      - "traefik.http.services.explorer.loadbalancer.server.port=3001"
+      - "traefik.http.middlewares.explorer_redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.explorer_insecure.rule=Host(`explorer.example.com`)"
+      - "traefik.http.routers.explorer_insecure.entrypoints=web"
+      - "traefik.http.routers.explorer_insecure.middlewares=explorer_redirect@docker"
   mongodb:
     image: mongo:latest
     container_name: "mongodb"
@@ -28,4 +63,5 @@ services:
       - ./data/db:/data/db
     ports:
       - 27017:27017
-    command: mongod --smallfiles --bind_ip 0.0.0.0 --logpath=/dev/null --quiet
+    command: mongod --bind_ip 0.0.0.0 --logpath=/dev/null --quiet --wiredTigerCacheSizeGB 2
+    restart: unless-stopped
