@@ -12,7 +12,7 @@ RUN apt-get update && \
 RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
 	apt-get install -y nodejs
 
-RUN git clone https://github.com/iquidus/explorer.git /opt/iquidus
+RUN git clone https://github.com/buzzkillb/D-explorer.git /opt/iquidus
 
 RUN cd /opt/iquidus && \
     git checkout master && \
