@@ -5,15 +5,15 @@
 */
 {
   // name your instance!
-  "title": "IQUIDUS - LOCAL",
+  "title": "D-Explorer",
 
-  "address": "127.0.0.1:3001",
+  "address": "https://explorer.example.com",
 
   // coin name
-  "coin": "Feathercoin",
+  "coin": "Denarius",
 
   // coin symbol
-  "symbol": "XVT",
+  "symbol": "D",
 
   // logo
   "logo": "/images/logo.png",
@@ -26,7 +26,7 @@
   //     Cerulean, Cosmo, Cyborg, Darkly, Flatly, Journal, Lumen, Paper,
   //     Readable, Sandstone, Simplex, Slate, Spacelab, Superhero, United, Yeti
   // theme (see /public/themes for available themes)
-  "theme": "Cosmo",
+  "theme": "Cyborg",
 
   // port to listen for requests on.
   "port" : 3001,
@@ -43,17 +43,20 @@
   //update script settings
   "update_timeout": 10,
   "check_timeout": 250,
+  "block_parallel_tasks": 1,
 
   // wallet settings
+  "use_rpc": true,
+
   "wallet": {
-    "host": "volta",
-    "port": 13143,
-    "user": "USERNAME",
-    "pass": "PASSWORD"
+    "host": "denarius",
+    "port": 32369,
+    "username": "rpcuser",
+    "password": "aLongPasswordLikeThis"
   },
 
   // confirmations
-  "confirmations": 6,
+  "confirmations": 10,
 
   // language settings
   "locale": "locale/en.json",
@@ -61,11 +64,12 @@
   // menu settings
   "display": {
     "api": true,
-    "markets": false,
+    "markets": true,
     "richlist": true,
-    "twitter": false,
+    "twitter": true,
     "facebook": false,
     "googleplus": false,
+    "youtube": false,
     "search": true,
     "movement": true,
     "network": true
@@ -74,28 +78,32 @@
   // index page (valid options for difficulty are POW, POS or Hybrid)
   "index": {
     "show_hashrate": true,
-    "difficulty": "POW",
-    "last_txs": 100
+    // Show Market Cap in header
+    "show_market_cap": false,
+    // Show Market Cap in place of price box
+    "show_market_cap_over_price": false,
+    "difficulty": "Hybrid",
+    "last_txs": 100,
+    "txs_per_page": 10
   },
 
   // ensure links on API page are valid
   "api": {
     "blockindex": 1337,
-    "blockhash": "2c4600714b7c24136aae64c6d4f764bc3be1094aa0fafd1e0003a1c6ff86f1e2",
-    "txhash": "b0b65d24bde29da13f964f70597578b651fd0adaa9ddb8fdf0799420f205741b",
-    "address": "SSn74P2tjbqvybtxXF2PNN5b8MPYLM5dcE"
+    "blockhash": "000000000661c86bf89e652eb142093bd9123006f3085595dee183bfe1c24570",
+    "txhash": "776684cfd496890268805a1d86d3fd00f4097c1dbffecc3acd79101c15216594",
+    "address": "DABQj7yoQuvfxVVWMf2mqWhoHLDMUqUJsc"
   },
 
   // market settings
   //supported markets: bittrex, poloniex, yobit, empoex, bleutrade, cryptopia, ccex
   //default market is loaded by default and determines last price in header
   "markets": {
-    "coin": "JBS",
+    "coin": "D",
     "exchange": "BTC",
-    "enabled": ["bittrex"],
-    "cryptopia_id": "1658",
-    "ccex_key" : "Get-Your-Own-Key",
-    "default": "bittrex"
+    "enabled": ["tradeogre"],
+    "tradeogre_id": "BTC-D",
+    "default": "tradeogre"
   },
 
   // richlist/top100 settings
@@ -114,20 +122,25 @@
     "high_flag": 5000
   },
 
-  // twitter, facebook, googleplus
-  "twitter": "iquidus",
+  // twitter, facebook, googleplus, youtube
+  "twitter": "denariuscoin",
   "facebook": "yourfacebookpage",
   "googleplus": "yourgooglepluspage",
+  "youtube": "youryoutubechannel",
 
   //genesis
-  "genesis_tx": "b89ee2bce23f5aac5c715d4e54e22a8577ad1864917aa131f1dc83802d9e883c",
-  "genesis_block": "0000001161c6225698995a1659f962d72ddc46567cafdcd673b6271a9b1ad02d",
+  "genesis_tx": "c6d8e8f56c25cac33567e571a3497bfc97f715140fcfe16d971333b38e4ee0f2",
+  "genesis_block": "00000d5dbbda01621cfc16bbc1f9bf3264d641a5dbf0de89fd0182c2c4828fcd",
 
   //heavy (enable/disable additional heavy features)
   "heavy": false,
 
+  //disable saving blocks & TXs via API during indexing.
+  "lock_during_index": false,
+
   //amount of txs to index per address (stores latest n txs)
   "txcount": 100,
+  "txcount_per_page": 50,
 
   //show total sent & received on address page (set false if PoS)
   "show_sent_received": true,
@@ -138,16 +151,16 @@
   // HEAVY: retreive from heavys getsupply api call
   // BALANCES : total of all address balances
   // TXOUTSET : retreive from gettxoutsetinfo api call
-  "supply": "BALANCES",
+  "supply": "GETINFO",
 
   // how to acquire network hashrate
   // getnetworkhashps: uses getnetworkhashps api call, returns in GH/s
   // netmhashps: uses getmininginfo.netmhashpsm returns in MH/s
-  "nethash": "getnetworkhashps",
+  "nethash": "netmhashps",
 
   // nethash unitd: sets nethash API return units
   // valid options: "P" (PH/s), "T" (TH/s), "G" (GH/s), "M" (MH/s), "K" (KH/s)
-  "nethash_units": "M",
+  "nethash_units": "G",
 
   // Address labels
   // example : "JhbrvAmM7kNpwA6wD5KoAsbtikLWWMNPcM": {"label": "This is a burn address", "type":"danger", "url":"http://example.com"}
@@ -155,7 +168,7 @@
   // type (optional) = class of label, valid types: default, primary, warning, danger, success
   // url (optional) = url to link to for more information
   "labels": {
-  //  "JSoEdU717hvz8KQVq2HfcqV9A79Wihzusu": {"label": "Developers address", "type":"primary", "url":"http://example.com"},
+  //  "DDD6SzCwXSEcTPHmNwEQX6xbUs2Rf3svNX": {"label": "Cryptopia address", "type":"primary", "url":"http://disney.com"},
   //  "JSWVXHWeYNknPdG9uDrcBoZHztKMFCsndw": {"label": "Cryptsy"}
   }
 }
