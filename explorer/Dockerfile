@@ -6,7 +6,7 @@ RUN apt-get install --yes software-properties-common
 RUN add-apt-repository --yes ppa:bitcoin/bitcoin
 
 RUN apt-get update && \
-    apt-get install -y libzmq-dev libgmp-dev libevent-dev libunbound-dev build-essential libtool autotools-dev autoconf libssl-dev git-core libboost-all-dev libdb4.8-dev libdb4.8++-dev libminiupnpc-dev nano pkg-config && \
+    apt-get install -y libcurl-dev libzmq-dev libgmp-dev libevent-dev libunbound-dev build-essential libtool autotools-dev autoconf libssl-dev git-core libboost-all-dev libdb4.8-dev libdb4.8++-dev libminiupnpc-dev nano pkg-config && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN git clone https://github.com/phoenixkonsole/papara/ /opt/papara
