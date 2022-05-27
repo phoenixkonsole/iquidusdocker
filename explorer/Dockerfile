@@ -1,30 +1,34 @@
 FROM ubuntu:16.04
-LABEL Description="This image is a build of the Iquidus explorer"
+LABEL Description="This image is a clean build of paparad from a paparab branch"
 
 RUN apt-get update
 RUN apt-get install --yes software-properties-common
 RUN add-apt-repository --yes ppa:bitcoin/bitcoin
 
 RUN apt-get update && \
-    apt-get install -y curl sudo nano net-tools build-essential git-core python telnet iputils-ping libkrb5-dev && \
+    apt-get install -y build-essential libtool autotools-dev autoconf libssl-dev git-core libboost-all-dev libdb4.8-dev libdb4.8++-dev libminiupnpc-dev nano pkg-config && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
-	apt-get install -y nodejs
+RUN git clone https://github.com/phoenixkonsole/papara/ /opt/papara
 
-RUN git clone https://github.com/buzzkillb/D-explorer.git /opt/iquidus
+RUN cd /opt/papara && \
+    ./autogen.sh && \
+    ./configure --with-miniupnpc --enable-upnp-default --disable-tests --without-gui --without-qrcode
+    
+RUN cd /opt/papara && \
+    make -j2
 
-RUN cd /opt/iquidus && \
-    git checkout master && \
-    npm install --production
+RUN cp /opt/papara/src/paparad /usr/local/bin/ && \
+    cp /opt/papara/src/papara-cli /usr/local/bin/
 
-ADD crontab /etc/cron.d/iquidus-cron
-RUN chmod 0644 /etc/cron.d/iquidus-cron
-RUN touch /var/log/cron.log
-COPY settings.json /opt/iquidus/settings.json
-COPY logo.png /opt/iquidus/public/images/logo.png
-
+RUN groupadd -r papara && useradd -r -m -g papara papara
+ENV papara_DATA /data
+RUN mkdir $papara_DATA
+ADD . /data
+RUN chown -R papara:papara $papara_DATA
+RUN ln -s $papara_DATA /home/papara/.papara
 USER root
-EXPOSE 3001
-
-CMD ["/bin/bash"]
+VOLUME /data
+WORKDIR /data
+EXPOSE 19001 19011
+CMD ["make start"]

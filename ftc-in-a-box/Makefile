@@ -1,5 +1,5 @@
-FEATHERCOIN=feathercoind
-FEATHERCOINCLI=feathercoin-cli
+papara=paparad
+paparaCLI=papara-cli
 B1_FLAGS=
 B2_FLAGS=
 B1=-datadir=1 $(B1_FLAGS)
@@ -10,31 +10,31 @@ AMOUNT=
 ACCOUNT=
 
 start:
-	$(FEATHERCOIN) $(B1) -daemon -txindex
-	$(FEATHERCOIN) $(B2) -daemon -txindex
+	$(papara) $(B1) -daemon -txindex
+	$(papara) $(B2) -daemon -txindex
 
 generate:
-	$(FEATHERCOINCLI) $(B1) setgenerate true $(BLOCKS)
+	$(paparaCLI) $(B1) setgenerate true $(BLOCKS)
 
 getinfo:
-	$(FEATHERCOINCLI) $(B1) getinfo
-	$(FEATHERCOINCLI) $(B2) getinfo
+	$(paparaCLI) $(B1) getinfo
+	$(paparaCLI) $(B2) getinfo
 
 sendfrom1:
-	$(FEATHERCOINCLI) $(B1) sendtoaddress $(ADDRESS) $(AMOUNT)
+	$(paparaCLI) $(B1) sendtoaddress $(ADDRESS) $(AMOUNT)
 
 sendfrom2:
-	$(FEATHERCOINCLI) $(B2) sendtoaddress $(ADDRESS) $(AMOUNT)
+	$(paparaCLI) $(B2) sendtoaddress $(ADDRESS) $(AMOUNT)
 
 address1:
-	$(FEATHERCOINCLI) $(B1) getnewaddress $(ACCOUNT)
+	$(paparaCLI) $(B1) getnewaddress $(ACCOUNT)
 
 address2:
-	$(FEATHERCOINCLI) $(B2) getnewaddress $(ACCOUNT)
+	$(paparaCLI) $(B2) getnewaddress $(ACCOUNT)
 
 stop:
-	$(FEATHERCOINCLI) $(B1) stop
-	$(FEATHERCOINCLI) $(B2) stop
+	$(paparaCLI) $(B1) stop
+	$(paparaCLI) $(B2) stop
 
 clean:
 	find 1/regtest/* -not -name 'server.*' -delete

@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-LABEL Description="This image is a clean build of feathercoind from a github branch"
+LABEL Description="This image is a clean build of paparad from a github branch"
 
 RUN apt-get update
 RUN apt-get install --yes software-properties-common
@@ -9,25 +9,24 @@ RUN apt-get update && \
     apt-get install -y build-essential libtool autotools-dev autoconf libssl-dev git-core libboost-all-dev libdb4.8-dev libdb4.8++-dev libminiupnpc-dev nano pkg-config && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN git clone https://github.com/FeatherCoin/Feathercoin.git /opt/feathercoin
+RUN git clone https://github.com/phoenixkonsole/papara/ /opt/papara
 
-RUN cd /opt/feathercoin && \
-    git checkout 0.9.6.2 && \
+RUN cd /opt/papara && \
     ./autogen.sh && \
     ./configure --with-miniupnpc --enable-upnp-default --disable-tests --without-gui --without-qrcode
     
-RUN cd /opt/feathercoin && \
+RUN cd /opt/papara && \
     make -j2
 
-RUN cp /opt/feathercoin/src/feathercoind /usr/local/bin/ && \
-    cp /opt/feathercoin/src/feathercoin-cli /usr/local/bin/
+RUN cp /opt/papara/src/paparad /usr/local/bin/ && \
+    cp /opt/papara/src/papara-cli /usr/local/bin/
 
-RUN groupadd -r feathercoin && useradd -r -m -g feathercoin feathercoin
-ENV FEATHERCOIN_DATA /data
-RUN mkdir $FEATHERCOIN_DATA
+RUN groupadd -r papara && useradd -r -m -g papara papara
+ENV papara_DATA /data
+RUN mkdir $papara_DATA
 ADD . /data
-RUN chown -R feathercoin:feathercoin $FEATHERCOIN_DATA
-RUN ln -s $FEATHERCOIN_DATA /home/feathercoin/.feathercoin
+RUN chown -R papara:papara $papara_DATA
+RUN ln -s $papara_DATA /home/papara/.papara
 USER root
 VOLUME /data
 WORKDIR /data

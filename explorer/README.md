@@ -1,6 +1,6 @@
 Instructions  
 ```
-git clone https://github.com/buzzkillb/iquidusdocker explorer
+git clone https://github.com/phoenixkonsole/iquidusdocker explorer
 cd explorer
 ```
 To swap out logo to your coin, change logo.png in explorer folder.  
@@ -72,7 +72,7 @@ address: DABQj7yoQuvfxVVWMf2mqWhoHLDMUqUJsc
 genesis_tx: c6d8e8f56c25cac33567e571a3497bfc97f715140fcfe16d971333b38e4ee0f2
 genesis_block: 00000d5dbbda01621cfc16bbc1f9bf3264d641a5dbf0de89fd0182c2c4828fcd
 ```
-FTC-in-a-box is a simple docker recipe that builds FTC from the github source, builds the iquidius explorer and attaches them together. So that you can have your own little "test" network right on your own computer. It's super lean, and you can generate many blocks pretty quickly.
+FTC-in-a-box is a simple docker recipe that builds FTC from the paparab source, builds the iquidius explorer and attaches them together. So that you can have your own little "test" network right on your own computer. It's super lean, and you can generate many blocks pretty quickly.
 
 If you have never setup or run docker, then this is your chance to spin it up and use it to develop something awesome with papara!
 
@@ -81,7 +81,7 @@ If you have never setup or run docker, then this is your chance to spin it up an
 1. Install Docker Community for your platform of choice - [Here](https://www.docker.com/community-edition#/download)
 2. Git clone this repository into a folder and navigate into it
 ```
-git clone https://github.com/buzzkillb/iquidusdocker explorer
+git clone https://github.com/phoenixkonsole/iquidusdocker explorer
 cd explorer
 ```
 3. Use the docker-compose command to build and turn on these containers
