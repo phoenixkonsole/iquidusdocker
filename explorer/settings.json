@@ -49,8 +49,8 @@
   "use_rpc": true,
 
   "wallet": {
-    "host": "denarius",
-    "port": 32369,
+    "host": "papara",
+    "port": 8051,
     "username": "rpcuser",
     "password": "aLongPasswordLikeThis"
   },
@@ -64,7 +64,7 @@
   // menu settings
   "display": {
     "api": true,
-    "markets": true,
+    "markets": false,
     "richlist": true,
     "twitter": true,
     "facebook": false,
@@ -82,7 +82,7 @@
     "show_market_cap": false,
     // Show Market Cap in place of price box
     "show_market_cap_over_price": false,
-    "difficulty": "Hybrid",
+    "difficulty": "POS",
     "last_txs": 100,
     "txs_per_page": 10
   },
@@ -123,7 +123,7 @@
   },
 
   // twitter, facebook, googleplus, youtube
-  "twitter": "denariuscoin",
+  "twitter": "teloscoin",
   "facebook": "yourfacebookpage",
   "googleplus": "yourgooglepluspage",
   "youtube": "youryoutubechannel",
